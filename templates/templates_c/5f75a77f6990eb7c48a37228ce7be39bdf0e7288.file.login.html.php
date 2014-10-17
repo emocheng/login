@@ -1,25 +1,25 @@
-<?php /* Smarty version Smarty-3.1.20, created on 2014-10-17 15:12:34
-         compiled from "/Users/tc/www/login/templates/index.html" */ ?>
-<?php /*%%SmartyHeaderCode:1544733545543cd5b5442f39-02746179%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.20, created on 2014-10-17 16:11:15
+         compiled from "/Users/tc/www/login/templates/login.html" */ ?>
+<?php /*%%SmartyHeaderCode:1443659845440c1fe4fdf98-29687443%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    'cb23cee340ae4ae0614fc95532b31e7b0032591a' => 
+    '5f75a77f6990eb7c48a37228ce7be39bdf0e7288' => 
     array (
-      0 => '/Users/tc/www/login/templates/index.html',
-      1 => 1413529933,
+      0 => '/Users/tc/www/login/templates/login.html',
+      1 => 1413533474,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1544733545543cd5b5442f39-02746179',
+  'nocache_hash' => '1443659845440c1fe4fdf98-29687443',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.20',
-  'unifunc' => 'content_543cd5b5491188_99413612',
+  'unifunc' => 'content_5440c1fe54a7e5_07236875',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_543cd5b5491188_99413612')) {function content_543cd5b5491188_99413612($_smarty_tpl) {?><html>
+<?php if ($_valid && !is_callable('content_5440c1fe54a7e5_07236875')) {function content_5440c1fe54a7e5_07236875($_smarty_tpl) {?><html>
 <head>
 	<meta charset="utf-8"> 
 	<title>登陆界面</title>
@@ -59,14 +59,35 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </tr>
         </form>
     </table>
-    <div class="longin_num hide">您已经登陆失败<span>2</span>次</div>
+    <div class="longin_num"></div>
         <script type="text/javascript">
             $(function(){
                 $(".btn").click(function(){
                     //$(".longin_num").removeClass("hide");
                     var username = $(".username").val();
                     var password = $(".password").val();
-                    console.log(username);
+                    //console.log(username);
+                    var $res = $(".longin_num");
+                    $.post("login.php?action=login", {
+                        username : username,
+                        password :password
+                    }, function(data){
+                        console.log(data);
+                        switch(data.type){
+                            case 1:
+                                $res.html("登陆成功");
+                                window.location.href="admin.php"; 
+                                break;
+                            case 2:
+                                var msg = "登陆失败,错误次数"+data.error;
+                               $res.html(msg);
+                                break;
+                            case 0:
+                                $res.html("等待30分钟");
+                                break;    
+                        }
+                        console.log(data);
+                    }, "json");
                     return false;
 
                     
