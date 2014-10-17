@@ -30,7 +30,48 @@ class My_Smarty extends Smarty {
 
 $s = new My_Smarty();
 
-function clearCookies(){  
-  setcookie('username','',time()-3600);
-  setcookie('isLogin','',time()-3600);
+/**
+ * 调试函数
+ * @param $arr
+ */
+function dump($arr) {
+    if(is_array($arr)) {
+        echo '<pre>';
+        print_r($arr);
+        echo '</pre>';
+    } else {
+        echo $arr;
+    }
 }
+
+
+function fetch_all($sql){
+    $result = mysql_query($sql);
+    $array = array();
+    while($row = mysql_fetch_array($result)){
+        $array[] = $row;
+    }
+    
+    return $array;
+}
+
+function num_rows($sql){
+  $result = mysql_query($sql);
+  $num = mysql_num_rows($result);
+  return $num;
+}
+function fetch_one($sql){
+  $result = mysql_query($sql);
+  $row = mysql_fetch_array($result);
+  return $row;
+}
+
+function clearSession(){  
+  $_SESSION=array();
+  if(isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), "", time()-3600, "/");
+}
+}
+
+
+session_start();

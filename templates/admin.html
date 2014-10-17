@@ -1,9 +1,65 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>管理员界面</title>
+	<title>用户界面</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
+<style type="text/css">
+	.a{
+		text-align: center;
+	}
+</style>
 <body>
-<p>网页主体</p>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<p>{{$info}}</p>
+
+<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>发件人</th>
+          <th>标题</th>
+          <th>时间</th>
+        </tr>
+      </thead>
+      <tbody>
+      	{{foreach $mail_info as $v}}
+        <tr>
+          <td>{{$v.id}}</td>
+          <td>{{$v.name}}</td>
+          <td>{{$v.title}}</td>
+          <td>{{$v.time|date_format:'%Y-%m-%d %H:%M:%S'}}</td>
+        </tr>
+        {{/foreach}}
+      </tbody>
+    </table>
+    <div class="a">
+		<a href="edit.php"><span class="glyphicon glyphicon-pencil"></span></a>
+	</div>
+	<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>收件人</th>
+          <th>标题</th>
+          <th>时间</th>
+        </tr>
+      </thead>
+      <tbody>
+      	{{foreach $re_info as $v}}
+        <tr>
+          <td>{{$v.id}}</td>
+          <td>{{$v.re_name}}</td>
+          <td>{{$v.title}}</td>
+          <td>{{$v.time|date_format:'%Y-%m-%d %H:%M:%S'}}</td>
+        </tr>
+        {{/foreach}}
+      </tbody>
+    </table>
+
 </body>
 </html>

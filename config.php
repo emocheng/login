@@ -15,9 +15,3 @@ if(!$con){
 mysql_query("set names utf8");
 mysql_select_db("login");
 
-//数组初始化
-function dump($arr){
-    echo"<pre>";
-    print_r($arr);
-    echo"</pre>";
-}
